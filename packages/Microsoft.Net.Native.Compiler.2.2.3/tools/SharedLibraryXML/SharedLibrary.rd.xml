@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+     Please only ever update the .template.rd.xml file and run the GenerateRdXml.cmd to update
+     the .rd.xml file. The generate will call a tool which calculates the WinRT closure and it will inject
+     all the necessary Type directives.
+     The format of the .template.rd.xml file is:
+     - It is copied to the .rd.xml as is
+     - __Assembly element is replaced with the list of Assembly elements for all the assemblies
+         which are listed in the AssemblyList.txt. Any additional attributes on the __Assembly will
+         be added to the created Assembly elements.
+     - __SharedTypes element is replaced with the Type elements for all of the types in the WinRT closure.
+         This element can have any number of child elements Exclude which specify which types
+         to omit even if they're found in the closure
+
+     The tool is called WinRTClosureFinder and its source code is in
+     https://devdiv.visualstudio.com/DevDiv/Default/_git/CoreFxTools?path=%2Fsrc%2Fapps%2FWinRTClosureFinder
+-->
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+  <Library Name="ClassLibrary">
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Collections" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Collections.Concurrent" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Diagnostics.Tools" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Diagnostics.Tracing" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Linq" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Linq.Expressions" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Memory" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.ObjectModel" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.CoreLib" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Interop" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Reflection.Core" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Reflection.Execution" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Reflection.Metadata" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.StackTraceMetadata" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Threading" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.TypeLoader" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Private.Uri" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Reflection.TypeExtensions" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Runtime" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Runtime.Extensions" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Security.Principal" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Text.RegularExpressions" />
+    <Assembly Shared="true" Dynamic="Required All" Name="System.Threading" />
+    <!-- Windows Runtime types exposed by the shared assemblies. 
+    
+        This must be a complete closure including interfaces needed by interop like, the interfaces that a class
+        implements, factory interfaces, and static interfaces.
+    -->
+    <Type Name="Windows.Foundation.AsyncActionCompletedHandler" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.IObservableMap`2" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.IObservableVector`1" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.IVectorChangedEventArgs" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.MapChangedEventHandler`2" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.VectorChangedEventHandler`1" Shared="true" />
+    <Type Name="Windows.Foundation.IAsyncAction" Shared="true" />
+    <Type Name="Windows.Foundation.IReferenceArray`1" Shared="true" />
+    <Type Name="Windows.Foundation.TypedEventHandler`2" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncActionProgressHandler`1" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncActionWithProgressCompletedHandler`1" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncOperationCompletedHandler`1" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncOperationProgressHandler`2" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2" Shared="true" />
+    <Type Name="Windows.Foundation.AsyncStatus" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.CollectionChange" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.IIterator`1" Shared="true" />
+    <Type Name="Windows.Foundation.Collections.IMapChangedEventArgs`1" Shared="true" />
+    <Type Name="Windows.Foundation.IAsyncActionWithProgress`1" Shared="true" />
+    <Type Name="Windows.Foundation.IAsyncInfo" Shared="true" />
+    <Type Name="Windows.Foundation.IAsyncOperation`1" Shared="true" />
+    <Type Name="Windows.Foundation.IAsyncOperationWithProgress`2" Shared="true" />
+    <Type Name="Windows.Foundation.IPropertyValue" Shared="true" />
+    <Type Name="Windows.Foundation.PropertyType" Shared="true" />
+    <Type Name="Windows.UI.Xaml.Data.ICustomProperty" Shared="true" />
+    <Type Name="Windows.UI.Xaml.Interop.IBindableIterator" Shared="true" />
+    <Type Name="Windows.UI.Xaml.Interop.IBindableVectorView" Shared="true" />
+    <Type Name="Windows.UI.Xaml.Interop.TypeKind" Shared="true" />
+    <!-- Force sharing frequently used type instantiations -->
+    <TypeInstantiation Name="System.Collections.Generic.HashSet" Arguments="System.Guid" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.HashSet" Arguments="System.Int32" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.List" Arguments="System.Byte" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.List" Arguments="System.Char" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.List" Arguments="System.Double" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.List" Arguments="System.Int64" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.List" Arguments="System.UInt64" Shared="true" />
+    <TypeInstantiation Name="System.Collections.Generic.Queue" Arguments="System.Object" Shared="true" />
+    <TypeInstantiation Name="System.Collections.ObjectModel.Collection" Arguments="System.Object" Shared="true" />
+    <TypeInstantiation Name="System.Collections.ObjectModel.ObservableCollection" Arguments="System.Object" Shared="true" />
+    <TypeInstantiation Name="System.Collections.ObjectModel.ReadOnlyCollection" Arguments="System.SByte" Shared="true" />
+    <TypeInstantiation Name="System.Collections.ObjectModel.ReadOnlyCollection" Arguments="System.UInt32" Shared="true" />
+    <TypeInstantiation Name="System.Lazy" Arguments="System.Double" Shared="true" />
+    <TypeInstantiation Name="System.Lazy" Arguments="System.Object" Shared="true" />
+    <TypeInstantiation Name="System.Nullable" Arguments="System.DateTimeOffset" Shared="true" />
+    <TypeInstantiation Name="System.Threading.Tasks.Task" Arguments="System.Byte" Shared="true" />
+  </Library>
+</Directives>
